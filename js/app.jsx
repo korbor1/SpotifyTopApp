@@ -1,3 +1,4 @@
+import request from 'request'; // request library
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -14,15 +15,19 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
         play = () => {
-            if(this.state.sound.paused){
-                this.state.sound.play();
+            if(this.props.song.track.preview_url){
+                if(this.state.sound.paused){
+                    this.state.sound.play();
+                } else {
+                    this.state.sound.pause();
+                }
             } else {
-                this.state.sound.pause();
+            console.log(this.props.song.track)
             }
         }
         getArtists = () => {
             let artist = this.props.song.track.artists.map((element) => {
-                return <div>{element.name}</div>
+                return <p>{element.name} </p>
             })
             this.setState({
                 artists: artist
@@ -32,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function(){
             this.getArtists();
         }
         render(){
-            return <div onClick={this.play}><img src={this.state.image} />{this.state.artists}{this.state.title}</div>
+            return <div className="flex-item"><img onClick={this.play} src={this.state.image} className="play greyHover"/><div>{this.state.artists}{this.state.title}</div></div>
         }
     }
     
@@ -57,26 +62,54 @@ document.addEventListener("DOMContentLoaded", function(){
             super(props);
             this.state = {
                 data: "",
-                completed: false
+                completed: false,
+                token: ""
             }
         }
         loadData = () => {
             fetch("https://api.spotify.com/v1/users/spotify/playlists/4hOKQuZbraPDIfaGbM3lKI/tracks",{
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": "Bearer BQAKfHeKz1J5kXJTmVM_6hJCaUhExkJmmJs52XBSaZBrS461Cw3JygDaCsZxP90-ch3awv-3cElO1Sfud8kZlB6hjrAqrZrL8UMrJsaMMiaYFDs-hGRZwE7eR8bI7Srt9w7zLWAsP86TxzUXxOwEK2Sl4NFgUJ6ctLUHZtHNfX5NrgqcvTDQhr78Z4i0BHLVX_-09lUH474EIFDCTFYSqwu3AUPv9Q-Hm5wmbyYpbku-ssulMeI"
-                }
-            })
-            .then(response => response.json())
-            .then(resp => this.setState({data: resp, completed: true}))
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": "Bearer " + this.state.token
+                    }
+                })
+                .then(response => response.json())
+                .then(resp => this.setState({data: resp, completed: true}))
         }
-        componentWillMount(){
-            this.loadData();
+         loadToken = () => {
+                var self = this;
+                var client_id = '44e66cf6b19a449a92b68b9290cb149e';
+                var client_secret = '957922058b0a41babb60a43333f2fee9';
+                var newKey = new Buffer(client_id + ':' + client_secret).toString('base64');
+
+                var auth = {
+                url: 'https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/api/token', // cors anywhere to avoid Cross-origin error
+                headers: {
+                    'Authorization': 'Basic ' + newKey
+                },
+                form: {
+                    grant_type: 'client_credentials'
+                },
+                json: true
+                };
+
+                request.post(auth, function(error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    self.setState({
+                        token: body.access_token
+                    }, () => {
+                        self.loadData();
+                    });
+                }
+                });
+        }
+        componentDidMount(){
+                this.loadToken();
         }
         
         render(){
                 if(this.state.completed){
-                 return <div><AllSongs info={this.state.data}/></div>
+                 return <div id="container"><AllSongs info={this.state.data}/></div>
                 } else {
                     return <div>Loading data...</div>
                 }
