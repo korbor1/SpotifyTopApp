@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 
 div{
@@ -9,14 +10,90 @@ div{
 
 #container{
     display: flex;
-    width: 1200px;
+    width: 100%;
     flex-direction: row;
+    background-color: white;
 }
 
-.play{
+#container-preload{
+    background-color: #e3e0e3;
+    color: black;
+    font-size: 48px;
+    width: 100vw;
+    height: 100vw;
+}
 
+#container-preload img{
+    display: block;
+    margin: 300px auto;
+    width: 5%;
+}
+
+#container-preload p{
+    margin: 100px auto;
+    width: 30%;
+}
+
+.img-container{
+    position: relative;
+    z-index: 1;
+}
+
+.fa-play{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    cursor: pointer;
+    display: none;
+}
+
+.fa-pause{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    cursor: pointer;
+    display: none;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+.greyHover{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: grey;
 }
 
 .greyHover:hover{
-    filter: opacity(60%);
+    opacity: 0.8;
+}
+
+.flex-item{
+    width: 45%;
+    padding-left: 5%;
+    background-color: #e3e0e3;
+}
+
+.buttons{
+    opacity: 1;
+}
+
+.infos{
+    padding: 15px;
+    margin-top: 10%;
+}
+
+span{
+    font-weight: 700;
 }

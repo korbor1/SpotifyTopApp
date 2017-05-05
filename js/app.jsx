@@ -9,9 +9,12 @@ document.addEventListener("DOMContentLoaded", function(){
             super(props);
             this.state = {
                 image: this.props.song.track.album.images[1].url,
-                title: this.props.song.track.name,
+                title: this.props.song.track.name.slice(0,20),
+                fullSong: this.props.song.track.external_urls.spotify,
                 artists: [],
-                sound: new Audio(this.props.song.track.preview_url)
+                sound: new Audio(this.props.song.track.preview_url),
+                showHide: true,
+                buttons: false
             }
         }
         play = () => {
@@ -26,36 +29,87 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
         getArtists = () => {
-            let artist = this.props.song.track.artists.map((element) => {
-                return <p>{element.name} </p>
+            let artist = this.props.song.track.artists.map((element, index) => {
+                return <p key={index}>{element.name.slice(0,20)} </p>
             })
             this.setState({
                 artists: artist
+            })
+        }
+        showHide = () => {
+            const currentState = this.state.showHide;
+            this.setState({
+                showHide: !currentState
+            })
+        }
+        onClickHandler = () => {
+            this.play();
+            this.showHide();
+        }
+        showButtons = () => {
+            const currentButtons = this.state.buttons;
+            this.setState({
+                buttons: !currentButtons
+            })
+        }
+        hideButtons = () => {
+            const currentButtons = this.state.buttons;
+            this.setState({
+                buttons: !currentButtons
             })
         }
         componentDidMount(){
             this.getArtists();
         }
         render(){
-            return <div className="flex-item"><img onClick={this.play} src={this.state.image} className="play greyHover"/><div>{this.state.artists}{this.state.title}</div></div>
+            let togglePlay = this.state.showHide ? "show" : "hide";
+            let togglePause = !this.state.showHide ? "show" : "hide";
+            let playClasses = `${togglePlay} fa fa-play fa-5x`;
+            let pauseClasses = `${togglePause} fa fa-pause fa-5x`;
+            let buttons = this.state.buttons ? "show" : "hide";
+            let buttonsClasses = `${buttons} buttons`
+            return <div className="flex-item">
+                <div onMouseEnter={this.showButtons} onMouseLeave={this.hideButtons} className="img-container">
+                     <img src={this.state.image} />
+                     <div className="greyHover">
+                        <div className={buttonsClasses}>
+                            <i onClick={this.onClickHandler} className={playClasses} aria-hidden="true"></i>
+                            <i onClick={this.onClickHandler} className={pauseClasses} aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                <div className="infos">
+                    <p>{this.props.place}</p>
+                    <span>{this.state.artists}</span>
+                    {this.state.title}
+                    <p><a href={this.state.fullSong}>Listen FULL song here</a></p>
+                </div>
+            </div>
         }
     }
     
  class AllSongs extends React.Component{
         constructor(props){
             super(props);
-            this.state = {
-            
-            }
         }
         render(){
-            let songs = this.props.info.items.map((element) => {
-                return <Song song={element}/>
+            let songs = this.props.info.items.map((element, index) => {
+                 return <Song place={index+1} song={element} key={index}/>
             })  
             return <div>{songs}</div>
         }
     }
 
+    class Load extends React.Component{
+        constructor(props){
+            super(props);
+        }
+        render(){
+            return <div id="container-preload">
+                        <img src="./images/4.gif"/>
+                    </div>
+        }
+    }
 
     class App extends React.Component{
         constructor(props){
@@ -111,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 if(this.state.completed){
                  return <div id="container"><AllSongs info={this.state.data}/></div>
                 } else {
-                    return <div>Loading data...</div>
+                    return <Load />
                 }
             }
         }
