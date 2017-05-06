@@ -39246,29 +39246,105 @@ document.addEventListener("DOMContentLoaded", function () {
         return Load;
     }(_react2.default.Component);
 
-    var App = function (_React$Component4) {
-        _inherits(App, _React$Component4);
+    var HeaderBar = function (_React$Component4) {
+        _inherits(HeaderBar, _React$Component4);
+
+        function HeaderBar(props) {
+            _classCallCheck(this, HeaderBar);
+
+            return _possibleConstructorReturn(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this, props));
+        }
+
+        _createClass(HeaderBar, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'header',
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        { id: 'about' },
+                        'ABOUT'
+                    ),
+                    _react2.default.createElement('img', { src: './images/spotify_logo.jpg' })
+                );
+            }
+        }]);
+
+        return HeaderBar;
+    }(_react2.default.Component);
+
+    var FooterBar = function (_React$Component5) {
+        _inherits(FooterBar, _React$Component5);
+
+        function FooterBar(props) {
+            _classCallCheck(this, FooterBar);
+
+            return _possibleConstructorReturn(this, (FooterBar.__proto__ || Object.getPrototypeOf(FooterBar)).call(this, props));
+        }
+
+        _createClass(FooterBar, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'footer',
+                    null,
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'SpotifyTOPapp made by ',
+                        _react2.default.createElement(
+                            'a',
+                            { href: 'mailto:kordian.boruta@gmail.com' },
+                            'KB'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'For more projects check out my ',
+                        _react2.default.createElement(
+                            'a',
+                            { target: '_blank', href: 'http://github.com/korbor1' },
+                            'Github'
+                        )
+                    ),
+                    _react2.default.createElement('img', { id: 'spotify-logo', src: './images/spotify_logo_green.jpg' }),
+                    _react2.default.createElement(
+                        'a',
+                        { target: '_blank', href: 'https://github.com/korbor1/SpotifyTopApp' },
+                        _react2.default.createElement('img', { id: 'github-logo', src: './images/GitHub-Mark-Light-32px.png' })
+                    )
+                );
+            }
+        }]);
+
+        return FooterBar;
+    }(_react2.default.Component);
+
+    var App = function (_React$Component6) {
+        _inherits(App, _React$Component6);
 
         function App(props) {
             _classCallCheck(this, App);
 
-            var _this4 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+            var _this6 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-            _this4.loadData = function () {
+            _this6.loadData = function () {
                 fetch("https://api.spotify.com/v1/users/spotify/playlists/4hOKQuZbraPDIfaGbM3lKI/tracks", {
                     headers: {
                         "Accept": "application/json",
-                        "Authorization": "Bearer " + _this4.state.token
+                        "Authorization": "Bearer " + _this6.state.token
                     }
                 }).then(function (response) {
                     return response.json();
                 }).then(function (resp) {
-                    return _this4.setState({ data: resp, completed: true });
+                    return _this6.setState({ data: resp, completed: true });
                 });
             };
 
-            _this4.loadToken = function () {
-                var self = _this4;
+            _this6.loadToken = function () {
+                var self = _this6;
                 var client_id = '44e66cf6b19a449a92b68b9290cb149e';
                 var client_secret = '957922058b0a41babb60a43333f2fee9';
                 var newKey = new Buffer(client_id + ':' + client_secret).toString('base64');
@@ -39295,12 +39371,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             };
 
-            _this4.state = {
+            _this6.state = {
                 data: "",
                 completed: false,
                 token: ""
             };
-            return _this4;
+            return _this6;
         }
 
         _createClass(App, [{
@@ -39314,11 +39390,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (this.state.completed) {
                     return _react2.default.createElement(
                         'div',
-                        { id: 'container' },
-                        _react2.default.createElement(AllSongs, { info: this.state.data })
+                        null,
+                        _react2.default.createElement(HeaderBar, null),
+                        _react2.default.createElement(
+                            'div',
+                            { id: 'container' },
+                            _react2.default.createElement(AllSongs, { info: this.state.data })
+                        ),
+                        _react2.default.createElement(FooterBar, null)
                     );
                 } else {
-                    return _react2.default.createElement(Load, null);
+                    return _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(HeaderBar, null),
+                        _react2.default.createElement(Load, null),
+                        _react2.default.createElement(FooterBar, null)
+                    );
                 }
             }
         }]);

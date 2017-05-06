@@ -111,6 +111,31 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 
+    class HeaderBar extends React.Component{
+        constructor(props){
+            super(props);
+        }
+        render(){
+            return <header>
+                    <div id="about">ABOUT</div>
+                    <img src="./images/spotify_logo.jpg"/>
+                    </header>
+        }
+    }
+
+    class FooterBar extends React.Component{
+        constructor(props){
+            super(props);
+        }
+        render(){
+            return <footer>
+                    <span>SpotifyTOPapp made by <a href="mailto:kordian.boruta@gmail.com">KB</a></span>
+                    <span>For more projects check out my <a target="_blank" href="http://github.com/korbor1">Github</a></span>
+                    <img id="spotify-logo" src="./images/spotify_logo_green.jpg" />
+                    <a target="_blank" href="https://github.com/korbor1/SpotifyTopApp"><img id="github-logo" src="./images/GitHub-Mark-Light-32px.png" /></a>
+                    </footer>
+        }
+    }
     class App extends React.Component{
         constructor(props){
             super(props);
@@ -163,9 +188,9 @@ document.addEventListener("DOMContentLoaded", function(){
         
         render(){
                 if(this.state.completed){
-                 return <div id="container"><AllSongs info={this.state.data}/></div>
+                 return <div><HeaderBar/><div id="container"><AllSongs info={this.state.data}/></div><FooterBar /></div>
                 } else {
-                    return <Load />
+                    return <div><HeaderBar/><Load /><FooterBar /></div>
                 }
             }
         }

@@ -4,8 +4,75 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+a{
+    color: #23CF5F;
+}
+
+#about{
+    width: 200px;
+    height: 50px;
+    border: 2px solid #23CF5F;
+    border-radius: 5px;
+    margin-left: 40%;
+    margin-top: 30px;
+    line-height: 50px;
+    text-align: center;
+}
+
+#about:hover{
+    background-color: #23CF5F;
+    color: white;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+footer a{
+    color: white;
+}
+
 div{
     float: left;
+}
+
+header{
+    width: 100%;
+    height: 130px;
+    background-color: #000;
+    color: #23CF5F;
+}
+
+header img{
+    width: 10%;
+    float: right;
+}
+
+footer{
+    width: 100%;
+    height: 15vh;
+    background-color: #23CF5F;
+    color: white;
+    clear: both;
+}
+
+footer img{
+    padding: 15px;
+    float: right;
+}
+
+footer span{
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+#spotify-logo{
+    width: 120px;
+    height: 35px;
+}
+
+#github-logo{
+    padding: 17px;
 }
 
 #container{
@@ -19,8 +86,8 @@ div{
     background-color: #e3e0e3;
     color: black;
     font-size: 48px;
-    width: 100vw;
-    height: 100vw;
+    width: 100%;
+    height: 100vh;
 }
 
 #container-preload img{
@@ -73,6 +140,7 @@ div{
   opacity: 0;
   transition: .5s ease;
   background-color: grey;
+  border-radius: 50%;
 }
 
 .greyHover:hover{
@@ -83,6 +151,11 @@ div{
     width: 45%;
     padding-left: 5%;
     background-color: #e3e0e3;
+    padding-top: 15px;
+}
+
+.flex-item img{
+    border-radius: 50%;
 }
 
 .buttons{
