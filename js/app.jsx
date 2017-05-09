@@ -1,6 +1,7 @@
 import request from 'request'; // request library
 import React from 'react';
 import ReactDOM from 'react-dom';
+import InfiniteScroll from 'react-infinite-scroller';
 
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -88,15 +89,32 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
     
- class AllSongs extends React.Component{
+    class AllSongs extends React.Component{
         constructor(props){
             super(props);
+            this.state = {
+                itemsValue: 10,
+                items: this.props.info.items.slice(0, 10)
+            }
+        }
+        loadMore = () => {
+            this.setState({
+                itemsValue: this.state.itemsValue + 10,
+                items: this.props.info.items.slice(0, this.state.itemsValue)          
+            })
         }
         render(){
-            let songs = this.props.info.items.map((element, index) => {
+            let songs = this.state.items.map((element, index) => {
                  return <Song place={index+1} song={element} key={index}/>
-            })  
-            return <div>{songs}</div>
+            })
+        
+            return <InfiniteScroll
+                        pageStart={0}
+                        loadMore={this.loadMore}
+                        hasMore={this.state.items.length == 100 ? false : true}
+                        loader={<Load />}>
+                        {songs}
+                    </InfiniteScroll>
         }
     }
 
