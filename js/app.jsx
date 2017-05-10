@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 if(this.state.completed){
                  return <div><HeaderBar/><div id="container"><AllSongs info={this.state.data}/></div><FooterBar /></div>
                 } else {
-                    return <div><HeaderBar/><Load /><FooterBar /></div>
+                    return <div id="container-preload"><HeaderBar/><Load /><FooterBar /></div>
                 }
             }
         }

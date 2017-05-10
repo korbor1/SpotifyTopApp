@@ -6,7 +6,7 @@ export default class Load extends React.Component{
             super(props);
         }
         render(){
-            return <div id="container-preload">
+            return <div id="container-preload-gif">
                         <img src="./images/4.gif"/>
                     </div>
         }

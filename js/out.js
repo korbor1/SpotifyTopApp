@@ -30115,7 +30115,7 @@ var Load = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'container-preload' },
+                { id: 'container-preload-gif' },
                 _react2.default.createElement('img', { src: './images/4.gif' })
             );
         }
@@ -39721,7 +39721,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     return _react2.default.createElement(
                         'div',
-                        null,
+                        { id: 'container-preload' },
                         _react2.default.createElement(_HeaderBar2.default, null),
                         _react2.default.createElement(_Load2.default, null),
                         _react2.default.createElement(_FooterBar2.default, null)
@@ -46446,7 +46446,7 @@ var AllSongs = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                { className: 'infinite-container', style: { height: "500px", overflow: "auto" } },
+                { className: 'infinite-container', style: { height: "80vh", overflow: "auto" } },
                 _react2.default.createElement(
                     _reactInfiniteScroller2.default,
                     {
