@@ -39532,7 +39532,7 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(console, Buffer) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -39548,9 +39548,21 @@ var _reactDom = __webpack_require__(407);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactInfiniteScroller = __webpack_require__(479);
+var _HeaderBar = __webpack_require__(538);
 
-var _reactInfiniteScroller2 = _interopRequireDefault(_reactInfiniteScroller);
+var _HeaderBar2 = _interopRequireDefault(_HeaderBar);
+
+var _FooterBar = __webpack_require__(539);
+
+var _FooterBar2 = _interopRequireDefault(_FooterBar);
+
+var _AllSongs = __webpack_require__(542);
+
+var _AllSongs2 = _interopRequireDefault(_AllSongs);
+
+var _Load = __webpack_require__(540);
+
+var _Load2 = _interopRequireDefault(_Load);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39558,311 +39570,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // request library
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //libraries
+
+
+//modules
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    var Song = function (_React$Component) {
-        _inherits(Song, _React$Component);
-
-        function Song(props) {
-            _classCallCheck(this, Song);
-
-            var _this = _possibleConstructorReturn(this, (Song.__proto__ || Object.getPrototypeOf(Song)).call(this, props));
-
-            _this.play = function () {
-                if (_this.props.song.track.preview_url) {
-                    if (_this.state.sound.paused) {
-                        _this.state.sound.play();
-                    } else {
-                        _this.state.sound.pause();
-                    }
-                } else {
-                    console.log(_this.props.song.track);
-                }
-            };
-
-            _this.getArtists = function () {
-                var artist = _this.props.song.track.artists.map(function (element, index) {
-                    return _react2.default.createElement(
-                        'p',
-                        { key: index },
-                        element.name.slice(0, 20),
-                        ' '
-                    );
-                });
-                _this.setState({
-                    artists: artist
-                });
-            };
-
-            _this.showHide = function () {
-                var currentState = _this.state.showHide;
-                _this.setState({
-                    showHide: !currentState
-                });
-            };
-
-            _this.onClickHandler = function () {
-                _this.play();
-                _this.showHide();
-            };
-
-            _this.showButtons = function () {
-                var currentButtons = _this.state.buttons;
-                _this.setState({
-                    buttons: !currentButtons
-                });
-            };
-
-            _this.hideButtons = function () {
-                var currentButtons = _this.state.buttons;
-                _this.setState({
-                    buttons: !currentButtons
-                });
-            };
-
-            _this.state = {
-                image: _this.props.song.track.album.images[1].url,
-                title: _this.props.song.track.name.slice(0, 20),
-                fullSong: _this.props.song.track.external_urls.spotify,
-                artists: [],
-                sound: new Audio(_this.props.song.track.preview_url),
-                showHide: true,
-                buttons: false
-            };
-            return _this;
-        }
-
-        _createClass(Song, [{
-            key: 'componentDidMount',
-            value: function componentDidMount() {
-                this.getArtists();
-            }
-        }, {
-            key: 'render',
-            value: function render() {
-                var togglePlay = this.state.showHide ? "show" : "hide";
-                var togglePause = !this.state.showHide ? "show" : "hide";
-                var playClasses = togglePlay + ' fa fa-play fa-5x';
-                var pauseClasses = togglePause + ' fa fa-pause fa-5x';
-                var buttons = this.state.buttons ? "show" : "hide";
-                var buttonsClasses = buttons + ' buttons';
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'flex-item' },
-                    _react2.default.createElement(
-                        'div',
-                        { onMouseEnter: this.showButtons, onMouseLeave: this.hideButtons, className: 'img-container' },
-                        _react2.default.createElement('img', { src: this.state.image }),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'greyHover' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: buttonsClasses },
-                                _react2.default.createElement('i', { onClick: this.onClickHandler, className: playClasses, 'aria-hidden': 'true' }),
-                                _react2.default.createElement('i', { onClick: this.onClickHandler, className: pauseClasses, 'aria-hidden': 'true' })
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'infos' },
-                        _react2.default.createElement(
-                            'p',
-                            null,
-                            this.props.place
-                        ),
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            this.state.artists
-                        ),
-                        this.state.title,
-                        _react2.default.createElement(
-                            'p',
-                            null,
-                            _react2.default.createElement(
-                                'a',
-                                { href: this.state.fullSong },
-                                'Listen FULL song here'
-                            )
-                        )
-                    )
-                );
-            }
-        }]);
-
-        return Song;
-    }(_react2.default.Component);
-
-    var AllSongs = function (_React$Component2) {
-        _inherits(AllSongs, _React$Component2);
-
-        function AllSongs(props) {
-            _classCallCheck(this, AllSongs);
-
-            var _this2 = _possibleConstructorReturn(this, (AllSongs.__proto__ || Object.getPrototypeOf(AllSongs)).call(this, props));
-
-            _this2.loadMore = function () {
-                _this2.setState({
-                    itemsValue: _this2.state.itemsValue + 10,
-                    items: _this2.props.info.items.slice(0, _this2.state.itemsValue)
-                });
-            };
-
-            _this2.state = {
-                itemsValue: 10,
-                items: _this2.props.info.items.slice(0, 10)
-            };
-            return _this2;
-        }
-
-        _createClass(AllSongs, [{
-            key: 'render',
-            value: function render() {
-                var songs = this.state.items.map(function (element, index) {
-                    return _react2.default.createElement(Song, { place: index + 1, song: element, key: index });
-                });
-
-                return _react2.default.createElement(
-                    _reactInfiniteScroller2.default,
-                    {
-                        pageStart: 0,
-                        loadMore: this.loadMore,
-                        hasMore: this.state.items.length == 100 ? false : true,
-                        loader: _react2.default.createElement(Load, null) },
-                    songs
-                );
-            }
-        }]);
-
-        return AllSongs;
-    }(_react2.default.Component);
-
-    var Load = function (_React$Component3) {
-        _inherits(Load, _React$Component3);
-
-        function Load(props) {
-            _classCallCheck(this, Load);
-
-            return _possibleConstructorReturn(this, (Load.__proto__ || Object.getPrototypeOf(Load)).call(this, props));
-        }
-
-        _createClass(Load, [{
-            key: 'render',
-            value: function render() {
-                return _react2.default.createElement(
-                    'div',
-                    { id: 'container-preload' },
-                    _react2.default.createElement('img', { src: './images/4.gif' })
-                );
-            }
-        }]);
-
-        return Load;
-    }(_react2.default.Component);
-
-    var HeaderBar = function (_React$Component4) {
-        _inherits(HeaderBar, _React$Component4);
-
-        function HeaderBar(props) {
-            _classCallCheck(this, HeaderBar);
-
-            return _possibleConstructorReturn(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this, props));
-        }
-
-        _createClass(HeaderBar, [{
-            key: 'render',
-            value: function render() {
-                return _react2.default.createElement(
-                    'header',
-                    null,
-                    _react2.default.createElement(
-                        'div',
-                        { id: 'about' },
-                        'ABOUT'
-                    ),
-                    _react2.default.createElement('img', { src: './images/spotify_logo.jpg' })
-                );
-            }
-        }]);
-
-        return HeaderBar;
-    }(_react2.default.Component);
-
-    var FooterBar = function (_React$Component5) {
-        _inherits(FooterBar, _React$Component5);
-
-        function FooterBar(props) {
-            _classCallCheck(this, FooterBar);
-
-            return _possibleConstructorReturn(this, (FooterBar.__proto__ || Object.getPrototypeOf(FooterBar)).call(this, props));
-        }
-
-        _createClass(FooterBar, [{
-            key: 'render',
-            value: function render() {
-                return _react2.default.createElement(
-                    'footer',
-                    null,
-                    _react2.default.createElement(
-                        'span',
-                        null,
-                        'SpotifyTOPapp made by ',
-                        _react2.default.createElement(
-                            'a',
-                            { href: 'mailto:kordian.boruta@gmail.com' },
-                            'KB'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'span',
-                        null,
-                        'For more projects check out my ',
-                        _react2.default.createElement(
-                            'a',
-                            { target: '_blank', href: 'http://github.com/korbor1' },
-                            'Github'
-                        )
-                    ),
-                    _react2.default.createElement('img', { id: 'spotify-logo', src: './images/spotify_logo_green.jpg' }),
-                    _react2.default.createElement(
-                        'a',
-                        { target: '_blank', href: 'https://github.com/korbor1/SpotifyTopApp' },
-                        _react2.default.createElement('img', { id: 'github-logo', src: './images/GitHub-Mark-Light-32px.png' })
-                    )
-                );
-            }
-        }]);
-
-        return FooterBar;
-    }(_react2.default.Component);
-
-    var App = function (_React$Component6) {
-        _inherits(App, _React$Component6);
+    var App = function (_React$Component) {
+        _inherits(App, _React$Component);
 
         function App(props) {
             _classCallCheck(this, App);
 
-            var _this6 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+            var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-            _this6.loadData = function () {
+            _this.loadData = function () {
                 fetch("https://api.spotify.com/v1/users/spotify/playlists/4hOKQuZbraPDIfaGbM3lKI/tracks", {
                     headers: {
                         "Accept": "application/json",
-                        "Authorization": "Bearer " + _this6.state.token
+                        "Authorization": "Bearer " + _this.state.token
                     }
                 }).then(function (response) {
                     return response.json();
                 }).then(function (resp) {
-                    return _this6.setState({ data: resp, completed: true });
+                    return _this.setState({ data: resp, completed: true });
                 });
             };
 
-            _this6.loadToken = function () {
-                var self = _this6;
+            _this.loadToken = function () {
+                var self = _this;
                 var client_id = '44e66cf6b19a449a92b68b9290cb149e';
                 var client_secret = '957922058b0a41babb60a43333f2fee9';
                 var newKey = new Buffer(client_id + ':' + client_secret).toString('base64');
@@ -39889,12 +39626,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             };
 
-            _this6.state = {
+            _this.state = {
                 data: "",
                 completed: false,
                 token: ""
             };
-            return _this6;
+            return _this;
         }
 
         _createClass(App, [{
@@ -39909,21 +39646,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     return _react2.default.createElement(
                         'div',
                         null,
-                        _react2.default.createElement(HeaderBar, null),
+                        _react2.default.createElement(_HeaderBar2.default, null),
                         _react2.default.createElement(
                             'div',
                             { id: 'container' },
-                            _react2.default.createElement(AllSongs, { info: this.state.data })
+                            _react2.default.createElement(_AllSongs2.default, { info: this.state.data })
                         ),
-                        _react2.default.createElement(FooterBar, null)
+                        _react2.default.createElement(_FooterBar2.default, null)
                     );
                 } else {
                     return _react2.default.createElement(
                         'div',
                         null,
-                        _react2.default.createElement(HeaderBar, null),
-                        _react2.default.createElement(Load, null),
-                        _react2.default.createElement(FooterBar, null)
+                        _react2.default.createElement(_HeaderBar2.default, null),
+                        _react2.default.createElement(_Load2.default, null),
+                        _react2.default.createElement(_FooterBar2.default, null)
                     );
                 }
             }
@@ -39932,22 +39669,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return App;
     }(_react2.default.Component);
 
-    //obj.items array of top songs where obj.items[0] is first song
-    //obj.items[0].track.album.images[1].url url of array of images [1] 300x300 of song
-    //obj.items[0].track.artists array of artist in song
-    //obj.items[0].track.artists[0].name name of first artist in song
-    //obj.items[0].track.name name of track
-    //obj.items[0].track.id id of track to next fetch
-    //obj.items[0].track.preview_url url to audio.play();
-    // https://api.spotify.com/v1/tracks/{id of track}
-
-    // fetch("https://api.spotify.com/v1/tracks/5CtI0qwDJkDQGwXD1H1cLb")
-    // .then(response => response.json())
-    // .then(obj => console.log(obj))
-
     _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById("app"));
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(1).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1).Buffer))
 
 /***/ }),
 /* 230 */
@@ -96691,6 +96415,458 @@ function extend() {
 __webpack_require__(230);
 module.exports = __webpack_require__(229);
 
+
+/***/ }),
+/* 537 */,
+/* 538 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(207);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(407);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var HeaderBar = function (_React$Component) {
+    _inherits(HeaderBar, _React$Component);
+
+    function HeaderBar(props) {
+        _classCallCheck(this, HeaderBar);
+
+        return _possibleConstructorReturn(this, (HeaderBar.__proto__ || Object.getPrototypeOf(HeaderBar)).call(this, props));
+    }
+
+    _createClass(HeaderBar, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'header',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { id: 'about' },
+                    'ABOUT'
+                ),
+                _react2.default.createElement('img', { src: './images/spotify_logo.jpg' })
+            );
+        }
+    }]);
+
+    return HeaderBar;
+}(_react2.default.Component);
+
+exports.default = HeaderBar;
+
+/***/ }),
+/* 539 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(207);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(407);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FooterBar = function (_React$Component) {
+    _inherits(FooterBar, _React$Component);
+
+    function FooterBar(props) {
+        _classCallCheck(this, FooterBar);
+
+        return _possibleConstructorReturn(this, (FooterBar.__proto__ || Object.getPrototypeOf(FooterBar)).call(this, props));
+    }
+
+    _createClass(FooterBar, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'footer',
+                null,
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'SpotifyTOPapp made by ',
+                    _react2.default.createElement(
+                        'a',
+                        { href: 'mailto:kordian.boruta@gmail.com' },
+                        'KB'
+                    )
+                ),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'For more projects check out my ',
+                    _react2.default.createElement(
+                        'a',
+                        { target: '_blank', href: 'http://github.com/korbor1' },
+                        'Github'
+                    )
+                ),
+                _react2.default.createElement('img', { id: 'spotify-logo', src: './images/spotify_logo_green.jpg' }),
+                _react2.default.createElement(
+                    'a',
+                    { target: '_blank', href: 'https://github.com/korbor1/SpotifyTopApp' },
+                    _react2.default.createElement('img', { id: 'github-logo', src: './images/GitHub-Mark-Light-32px.png' })
+                )
+            );
+        }
+    }]);
+
+    return FooterBar;
+}(_react2.default.Component);
+
+exports.default = FooterBar;
+
+/***/ }),
+/* 540 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(207);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(407);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Load = function (_React$Component) {
+    _inherits(Load, _React$Component);
+
+    function Load(props) {
+        _classCallCheck(this, Load);
+
+        return _possibleConstructorReturn(this, (Load.__proto__ || Object.getPrototypeOf(Load)).call(this, props));
+    }
+
+    _createClass(Load, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { id: 'container-preload' },
+                _react2.default.createElement('img', { src: './images/4.gif' })
+            );
+        }
+    }]);
+
+    return Load;
+}(_react2.default.Component);
+
+exports.default = Load;
+
+/***/ }),
+/* 541 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(console) {
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(207);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(407);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Song = function (_React$Component) {
+    _inherits(Song, _React$Component);
+
+    function Song(props) {
+        _classCallCheck(this, Song);
+
+        var _this = _possibleConstructorReturn(this, (Song.__proto__ || Object.getPrototypeOf(Song)).call(this, props));
+
+        _this.play = function () {
+            if (_this.props.song.track.preview_url) {
+                if (_this.state.sound.paused) {
+                    _this.state.sound.play();
+                } else {
+                    _this.state.sound.pause();
+                }
+            } else {
+                console.log(_this.props.song.track);
+            }
+        };
+
+        _this.getArtists = function () {
+            var artist = _this.props.song.track.artists.map(function (element, index) {
+                return _react2.default.createElement(
+                    'p',
+                    { key: index },
+                    element.name.slice(0, 20),
+                    ' '
+                );
+            });
+            _this.setState({
+                artists: artist
+            });
+        };
+
+        _this.showHide = function () {
+            var currentState = _this.state.showHide;
+            _this.setState({
+                showHide: !currentState
+            });
+        };
+
+        _this.onClickHandler = function () {
+            _this.play();
+            _this.showHide();
+        };
+
+        _this.showButtons = function () {
+            var currentButtons = _this.state.buttons;
+            _this.setState({
+                buttons: !currentButtons
+            });
+        };
+
+        _this.hideButtons = function () {
+            var currentButtons = _this.state.buttons;
+            _this.setState({
+                buttons: !currentButtons
+            });
+        };
+
+        _this.state = {
+            image: _this.props.song.track.album.images[1].url,
+            title: _this.props.song.track.name.slice(0, 20),
+            fullSong: _this.props.song.track.external_urls.spotify,
+            artists: [],
+            sound: new Audio(_this.props.song.track.preview_url),
+            showHide: true,
+            buttons: false
+        };
+        return _this;
+    }
+
+    _createClass(Song, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.getArtists();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var togglePlay = this.state.showHide ? "show" : "hide";
+            var togglePause = !this.state.showHide ? "show" : "hide";
+            var playClasses = togglePlay + ' fa fa-play fa-5x';
+            var pauseClasses = togglePause + ' fa fa-pause fa-5x';
+            var buttons = this.state.buttons ? "show" : "hide";
+            var buttonsClasses = buttons + ' buttons';
+            return _react2.default.createElement(
+                'div',
+                { className: 'flex-item' },
+                _react2.default.createElement(
+                    'div',
+                    { onMouseEnter: this.showButtons, onMouseLeave: this.hideButtons, className: 'img-container' },
+                    _react2.default.createElement('img', { src: this.state.image }),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'greyHover' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: buttonsClasses },
+                            _react2.default.createElement('i', { onClick: this.onClickHandler, className: playClasses, 'aria-hidden': 'true' }),
+                            _react2.default.createElement('i', { onClick: this.onClickHandler, className: pauseClasses, 'aria-hidden': 'true' })
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'infos' },
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        this.props.place
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        this.state.artists
+                    ),
+                    this.state.title,
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        _react2.default.createElement(
+                            'a',
+                            { href: this.state.fullSong },
+                            'Listen FULL song here'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Song;
+}(_react2.default.Component);
+
+exports.default = Song;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+
+/***/ }),
+/* 542 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(207);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(407);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactInfiniteScroller = __webpack_require__(479);
+
+var _reactInfiniteScroller2 = _interopRequireDefault(_reactInfiniteScroller);
+
+var _Song = __webpack_require__(541);
+
+var _Song2 = _interopRequireDefault(_Song);
+
+var _Load = __webpack_require__(540);
+
+var _Load2 = _interopRequireDefault(_Load);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AllSongs = function (_React$Component) {
+    _inherits(AllSongs, _React$Component);
+
+    function AllSongs(props) {
+        _classCallCheck(this, AllSongs);
+
+        var _this = _possibleConstructorReturn(this, (AllSongs.__proto__ || Object.getPrototypeOf(AllSongs)).call(this, props));
+
+        _this.loadMore = function () {
+            _this.setState({
+                itemsValue: _this.state.itemsValue + 10,
+                items: _this.props.info.items.slice(0, _this.state.itemsValue)
+            });
+        };
+
+        _this.state = {
+            itemsValue: 10,
+            items: _this.props.info.items.slice(0, 10)
+        };
+        return _this;
+    }
+
+    _createClass(AllSongs, [{
+        key: 'render',
+        value: function render() {
+            var songs = this.state.items.map(function (element, index) {
+                return _react2.default.createElement(_Song2.default, { place: index + 1, song: element, key: index });
+            });
+
+            return _react2.default.createElement(
+                'div',
+                { style: { height: "500px", overflow: "auto" } },
+                _react2.default.createElement(
+                    _reactInfiniteScroller2.default,
+                    {
+                        pageStart: 0,
+                        loadMore: this.loadMore,
+                        hasMore: this.state.items.length == 100 ? false : true,
+                        loader: _react2.default.createElement(_Load2.default, null),
+                        useWindow: false },
+                    songs
+                )
+            );
+        }
+    }]);
+
+    return AllSongs;
+}(_react2.default.Component);
+
+exports.default = AllSongs;
 
 /***/ })
 /******/ ]);

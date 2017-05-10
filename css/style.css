@@ -14,7 +14,7 @@ a{
     border: 2px solid #23CF5F;
     border-radius: 5px;
     margin-left: 40%;
-    margin-top: 30px;
+    margin-top: 10px;
     line-height: 50px;
     text-align: center;
 }
@@ -36,7 +36,7 @@ div{
 
 header{
     width: 100%;
-    height: 130px;
+    height: 80px;
     background-color: #000;
     color: #23CF5F;
 }
@@ -87,7 +87,7 @@ footer span{
     color: black;
     font-size: 48px;
     width: 100%;
-    height: 450px;
+    height: 500px;
 }
 
 #container-preload img{
@@ -108,16 +108,16 @@ footer span{
 
 .fa-play{
     position: absolute;
-    top: 40%;
-    left: 45%;
+    top: 25%;
+    left: 35%;
     cursor: pointer;
     display: none;
 }
 
 .fa-pause{
     position: absolute;
-    top: 40%;
-    left: 40%;
+    top: 25%;
+    left: 28%;
     cursor: pointer;
     display: none;
 }
@@ -135,7 +135,7 @@ footer span{
   bottom: 0;
   left: 0;
   right: 0;
-  height: 300px;
+  height: 150px;
   width: 100%;
   opacity: 0;
   transition: .5s ease;
@@ -148,6 +148,7 @@ footer span{
 }
 
 .flex-item{
+    height: 200px;
     width: 45%;
     padding-left: 5%;
     background-color: #e3e0e3;
@@ -156,6 +157,8 @@ footer span{
 
 .flex-item img{
     border-radius: 50%;
+    width: 150px;
+    height: 150px;
 }
 
 .buttons{
@@ -163,8 +166,7 @@ footer span{
 }
 
 .infos{
-    padding: 15px;
-    margin-top: 10%;
+    padding: 10px;
 }
 
 span{
