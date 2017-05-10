@@ -24,7 +24,7 @@ export default class AllSongs extends React.Component{
                  return <Song place={index+1} song={element} key={index}/>
             })
         
-            return <div style={{height: "500px", overflow:"auto"}}><InfiniteScroll
+            return <div className="infinite-container" style={{height: "500px", overflow:"auto"}}><InfiniteScroll
                         pageStart={0}
                         loadMore={this.loadMore}
                         hasMore={this.state.items.length == 100 ? false : true}

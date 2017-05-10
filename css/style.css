@@ -108,16 +108,16 @@ footer span{
 
 .fa-play{
     position: absolute;
-    top: 25%;
-    left: 35%;
+    top: 35%;
+    left: 40%;
     cursor: pointer;
     display: none;
 }
 
 .fa-pause{
     position: absolute;
-    top: 25%;
-    left: 28%;
+    top: 35%;
+    left: 37%;
     cursor: pointer;
     display: none;
 }
@@ -149,8 +149,8 @@ footer span{
 
 .flex-item{
     height: 200px;
-    width: 45%;
-    padding-left: 5%;
+    width: 30%;
+    padding-left: 15%;
     background-color: #e3e0e3;
     padding-top: 15px;
 }
@@ -171,4 +171,9 @@ footer span{
 
 span{
     font-weight: 700;
+}
+
+.infinite-container{
+    width: 100%;
+    background-color: #e3e0e3;
 }

@@ -61,8 +61,8 @@ export default class Song extends React.Component{
         render(){
             let togglePlay = this.state.showHide ? "show" : "hide";
             let togglePause = !this.state.showHide ? "show" : "hide";
-            let playClasses = `${togglePlay} fa fa-play fa-5x`;
-            let pauseClasses = `${togglePause} fa fa-pause fa-5x`;
+            let playClasses = `${togglePlay} fa fa-play fa-3x`;
+            let pauseClasses = `${togglePause} fa fa-pause fa-3x`;
             let buttons = this.state.buttons ? "show" : "hide";
             let buttonsClasses = `${buttons} buttons`
             return <div className="flex-item">
