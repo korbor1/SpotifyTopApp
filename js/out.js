@@ -46454,7 +46454,8 @@ var AllSongs = function (_React$Component) {
                         loadMore: this.loadMore,
                         hasMore: this.state.items.length == 100 ? false : true,
                         loader: _react2.default.createElement(_Load2.default, null),
-                        useWindow: false },
+                        useWindow: false,
+                        threshold: 700 },
                     songs
                 )
             );
@@ -46590,9 +46591,13 @@ var HeaderBar = function (_React$Component) {
                 'header',
                 null,
                 _react2.default.createElement(
-                    'div',
-                    { id: 'about' },
-                    'ABOUT'
+                    'a',
+                    { href: 'https://github.com/korbor1/SpotifyTopApp/blob/master/README.md', target: '_blank' },
+                    _react2.default.createElement(
+                        'div',
+                        { id: 'about' },
+                        'ABOUT'
+                    )
                 ),
                 _react2.default.createElement('img', { src: './images/spotify_logo.jpg' })
             );
@@ -46719,6 +46724,7 @@ var Song = function (_React$Component) {
             var pauseClasses = togglePause + ' fa fa-pause fa-3x';
             var buttons = this.state.buttons ? "show" : "hide";
             var buttonsClasses = buttons + ' buttons';
+
             return _react2.default.createElement(
                 'div',
                 { className: 'flex-item' },
@@ -46744,6 +46750,11 @@ var Song = function (_React$Component) {
                         'p',
                         null,
                         this.props.place
+                    ),
+                    !this.props.song.track.preview_url && _react2.default.createElement(
+                        'p',
+                        { className: 'notAvailable' },
+                        'Preview not available!'
                     ),
                     _react2.default.createElement(
                         'span',

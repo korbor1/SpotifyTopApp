@@ -7,7 +7,8 @@ export default class HeaderBar extends React.Component{
         }
         render(){
             return <header>
-                    <div id="about">ABOUT</div>
+                    <a href="https://github.com/korbor1/SpotifyTopApp/blob/master/README.md" target="_blank">
+                    <div id="about">ABOUT</div></a>
                     <img src="./images/spotify_logo.jpg"/>
                     </header>
         }

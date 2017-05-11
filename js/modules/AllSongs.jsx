@@ -29,7 +29,8 @@ export default class AllSongs extends React.Component{
                         loadMore={this.loadMore}
                         hasMore={this.state.items.length == 100 ? false : true}
                         loader={<Load />}
-                        useWindow={false}>
+                        useWindow={false}
+                        threshold={700}>
                         {songs}
                     </InfiniteScroll></div>
         }

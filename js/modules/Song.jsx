@@ -65,6 +65,7 @@ export default class Song extends React.Component{
             let pauseClasses = `${togglePause} fa fa-pause fa-3x`;
             let buttons = this.state.buttons ? "show" : "hide";
             let buttonsClasses = `${buttons} buttons`
+
             return <div className="flex-item">
                 <div onMouseEnter={this.showButtons} onMouseLeave={this.hideButtons} className="img-container">
                      <img src={this.state.image} />
@@ -77,6 +78,7 @@ export default class Song extends React.Component{
                     </div>
                 <div className="infos">
                     <p>{this.props.place}</p>
+                    {!this.props.song.track.preview_url && <p className="notAvailable">Preview not available!</p>}
                     <span>{this.state.artists}</span>
                     {this.state.title}
                     <p><a href={this.state.fullSong}>Listen FULL song here</a></p>
