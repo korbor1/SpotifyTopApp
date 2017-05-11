@@ -46767,7 +46767,7 @@ var Song = function (_React$Component) {
                         null,
                         _react2.default.createElement(
                             'a',
-                            { href: this.state.fullSong },
+                            { href: this.state.fullSong, target: '_blank' },
                             'Listen FULL song here'
                         )
                     )

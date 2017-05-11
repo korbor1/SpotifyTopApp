@@ -81,7 +81,7 @@ export default class Song extends React.Component{
                     {!this.props.song.track.preview_url && <p className="notAvailable">Preview not available!</p>}
                     <span>{this.state.artists}</span>
                     {this.state.title}
-                    <p><a href={this.state.fullSong}>Listen FULL song here</a></p>
+                    <p><a href={this.state.fullSong} target="_blank">Listen FULL song here</a></p>
                 </div>
             </div>
         }
